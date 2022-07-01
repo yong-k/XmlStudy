@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- DTD 추가 -->
+<!-- 
+	지금 구조를 보면 memberList 안에  
+	1) memberInfo 가 하나가 아니라 여러개가 온다.
+	   그럴 때에는 
+	   ELEMENT memberList (memberInfo+)
+	   이런식으로 『+』를 사용해서 표시한다.
+	   
+	2) memberInfo 안에 curriculumn 이 있는것도 있고, 없는 것도 있다.
+	   필수 속성이 아닌 거는 『?』를 사용해서 표시한다.
+	   
+	3) 속성은 『ELEMENT』 가 아니라 『ATTLIST』 이다.
+-->
+
+<!DOCTYPE memberList
+[
+<!ELEMENT memberList (memberInfo+)>
+<!ELEMENT memberInfo (name, tel, email, curriculumn?, addr)>
+<!ELEMENT name (#PCDATA)>
+<!ELEMENT tel (#PCDATA)>
+<!ELEMENT email (#PCDATA)>
+<!ELEMENT curriculumn (sub+)>
+<!ELEMENT sub (#PCDATA)>
+<!ELEMENT addr (#PCDATA)>
+<!ATTLIST memberInfo mid CDATA #IMPLIED>
+<!-- └→ memberInfo에 mid가 CDATA 형식으로 있는데 이 값은 넣어도 되고 안 넣어도 된다. -->
+]>
+<!-- #IMPLIED      : 이 속성은 명시되기도 하고, 명시되지 않기도 한다. -->
+<!-- #REQUIRED     : 이 속성은 반드시 명시되어야 한다.-->
+<!-- #FIXED 특정값 : 이 속성은 특정값으로 고정되어 사용된다. -->
+
+<!-- 이렇게 구성하면 밑에 빨간 엑스 다 없어짐 -->
+
+
+<memberList>
+	<memberInfo mid="1">
+		<name>김정용</name>
+		<tel><![CDATA[010-2731-3153]]></tel>
+		<email><![CDATA[cin03023@gmail.com]]></email>
+		<curriculumn>
+			<sub>JAVA SE</sub>
+			<sub>ORACLE</sub>
+			<sub><![CDATA[Servlet&JSP]]></sub>
+		</curriculumn>
+		<addr>서울시 마포구 월드컵북로</addr>
+	</memberInfo>
+	
+	<memberInfo mid="2">
+		<name>김정영</name>
+		<tel><![CDATA[010-2731-3153]]></tel>
+		<email><![CDATA[cin03023@gmail.com]]></email>
+		<addr>서울시 마포구 월드컵북로</addr>
+	</memberInfo>
+	
+</memberList>
